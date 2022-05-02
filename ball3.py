@@ -11,9 +11,9 @@ width, height = size
 speed = [1, 1]
 white = 255, 255, 255
 black = 0, 0, 0
-fondo = pygame.image.load("fondo.png").convert()
+#fondo = pygame.image.load("fondo.png").convert()
 # Crea un objeto imagen pelota y obtengo su rectángulo
-ball = pygame.image.load("ball.png")
+ball = pygame.image.load("ball2.png")
 ballrect = ball.get_rect()
 # Crea un objeto imagen bate y obtengo su rectángulo
 bate1 = pygame.image.load("bate.png")
@@ -22,8 +22,8 @@ baterect = bate.get_rect()
 baterect1 = bate1.get_rect()
 # Pongo el bate en el centro de la pantalla
 ballrect.move_ip(size[0]/2,size[1]/2)
-baterect.move_ip(200, 300)
-baterect1.move_ip(600, 300)
+baterect.move_ip(size[0]/5,size[1]/2)
+baterect1.move_ip(size[0]*4/5,size[1]/2)
 # Comenzamos el bucle del juego
 run=True
 while run:
@@ -55,7 +55,7 @@ while run:
         speed[1] = -speed[1]
     # Pinto el fondo de blanco, dibujo la pelota y actualizo la pantalla
     screen.fill(black)
-    screen.blit(fondo, [0, 40])
+    #screen.blit(fondo, [0, 40])
     screen.blit(ball, ballrect)
     screen.blit(bate1, baterect1)
     screen.blit(bate, baterect)

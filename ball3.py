@@ -13,11 +13,13 @@ white = 255, 255, 255
 black = 0, 0, 0
 #fondo = pygame.image.load("fondo.png").convert()
 # Crea un objeto imagen pelota y obtengo su rectángulo
-ball = pygame.image.load("ball2.png")
+ballPic="ball2.png"
+ball = pygame.image.load(ballPic)
 ballrect = ball.get_rect()
 # Crea un objeto imagen bate y obtengo su rectángulo
-bate1 = pygame.image.load("bate.png")
-bate = pygame.image.load("bate.png")
+batePic="bate.png"
+bate = pygame.image.load(batePic)
+bate1 = pygame.image.load(batePic)
 baterect = bate.get_rect()
 baterect1 = bate1.get_rect()
 # Pongo el bate en el centro de la pantalla
@@ -36,16 +38,16 @@ while run:
     # Compruebo si se ha pulsado alguna tecla
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w]:
-        baterect1=baterect1.move(0, -1)
+        baterect = baterect.move(0, -1)
     if keys[pygame.K_s]:
-        baterect1=baterect1.move(0, 1)
+        baterect = baterect.move(0, 1)
     # Compruebo si hay colisión
     if baterect.colliderect(ballrect) or baterect1.colliderect(ballrect):
         speed[0] = - speed[0]
     if keys[pygame.K_UP]:
-        baterect=baterect.move(0, -1)
+        baterect1=baterect1.move(0, -1)
     if keys[pygame.K_DOWN]:
-        baterect=baterect.move(0, 1)
+        baterect1=baterect1.move(0, 1)
     # Muevo la pelota
     ballrect = ballrect.move(speed)
     # Compruebo si la pelota llega a los límites de la ventana

@@ -11,21 +11,19 @@ ancho, altura = tamanio
 velocidad = [1, 1]
 blanco = 255, 255, 255
 negro = 0, 0, 0
-#fondo = pygame.image.load("fondo.png").convert()
+fondo = pygame.image.load("fondo.png").convert()
 # Crea un objeto imagen pelota y obtengo su rectángulo
-pelotaPng="pelota.png"
-pelota = pygame.image.load(pelotaPng)
+pelota = pygame.image.load("pelota.png")
 pelotaRectangulo = pelota.get_rect()
 # Crea un objeto imagen bate y obtengo su rectángulo
-batePic="bate.png"
-bate = pygame.image.load(batePic)
-bate1 = pygame.image.load(batePic)
+bate1 = pygame.image.load("bate.png")
+bate = pygame.image.load("bate.png")
 bateRectangulo = bate.get_rect()
-bateRectangulo1 = bate1.get_rect()
+bate1Rectangulo = bate1.get_rect()
 # Pongo el bate en el centro de la pantalla
 pelotaRectangulo.move_ip(tamanio[0]/2,tamanio[1]/2)
-bateRectangulo.move_ip(tamanio[0]/5,tamanio[1]/2)
-bateRectangulo1.move_ip(tamanio[0]*4/5,tamanio[1]/2)
+bateRectangulo.move_ip(200, 300)
+bate1Rectangulo.move_ip(600, 300)
 # Comenzamos el bucle del juego
 corriendo=True
 while corriendo:
@@ -38,16 +36,16 @@ while corriendo:
     # Compruebo si se ha pulsado alguna tecla
     teclas = pygame.key.get_pressed()
     if teclas[pygame.K_w]:
-        bateRectangulo = bateRectangulo.move(0, -1)
+        bate1Rectangulo=bate1Rectangulo.move(0, -1)
     if teclas[pygame.K_s]:
-        bateRectangulo = bateRectangulo.move(0, 1)
+        bate1Rectangulo=bate1Rectangulo.move(0, 1)
     # Compruebo si hay colisión
-    if bateRectangulo.colliderect(pelotaRectangulo) or bateRectangulo1.colliderect(pelotaRectangulo):
+    if bateRectangulo.colliderect(pelotaRectangulo) or bate1Rectangulo.colliderect(pelotaRectangulo):
         velocidad[0] = - velocidad[0]
     if teclas[pygame.K_UP]:
-        bateRectangulo1=bateRectangulo1.move(0, -1)
+        bateRectangulo=bateRectangulo.move(0, -1)
     if teclas[pygame.K_DOWN]:
-        bateRectangulo1=bateRectangulo1.move(0, 1)
+        bateRectangulo=bateRectangulo.move(0, 1)
     # Muevo la pelota
     pelotaRectangulo = pelotaRectangulo.move(velocidad)
     # Compruebo si la pelota llega a los límites de la ventana
@@ -57,9 +55,9 @@ while corriendo:
         velocidad[1] = -velocidad[1]
     # Pinto el fondo de blanco, dibujo la pelota y actualizo la pantalla
     pantalla.fill(negro)
-    #pantalla.blit(fondo, [0, 40])
+    pantalla.blit(fondo, [0, 40])
     pantalla.blit(pelota, pelotaRectangulo)
-    pantalla.blit(bate1, bateRectangulo1)
+    pantalla.blit(bate1, bate1Rectangulo)
     pantalla.blit(bate, bateRectangulo)
 
     pygame.display.flip()

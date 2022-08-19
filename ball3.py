@@ -4,7 +4,7 @@ import sys, pygame
 pygame.init()
 
 
-#HOLA
+#GUIDOOOO
 
 
 # Muestro una ventana de 800x600

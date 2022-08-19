@@ -3,6 +3,8 @@ import sys, pygame
 # Inicializamos pygame
 pygame.init()
 
+#TEST
+
 # Muestro una ventana de 800x600
 tamanio = 800, 600
 pantalla = pygame.display.set_mode(tamanio)

@@ -3,7 +3,7 @@ import sys, pygame
 # Inicializamos pygame
 pygame.init()
 
-#TEST
+#TEST 2
 
 # Muestro una ventana de 800x600
 tamanio = 800, 600

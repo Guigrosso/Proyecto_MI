@@ -81,6 +81,7 @@ while corriendo:
     pantalla.blit(pelota, pelotaRectangulo)
     pantalla.blit(bate1, bate1Rectangulo)
     pantalla.blit(bate, bateRectangulo)
+    
 
     pygame.display.flip()
     

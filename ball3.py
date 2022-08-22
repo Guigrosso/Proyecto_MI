@@ -8,6 +8,15 @@ pygame.init()
 tamanio = 800, 600
 pantalla = pygame.display.set_mode(tamanio)
 
+# Genero el contador
+
+def draw_text(surface, text, size, x,y):
+    font = pygame.font.SysFont("serif", size)
+    text_surface = font.render(text,True, blanco)
+    text_rect = text_surface.get_rect()
+    text_rect.midtop = (x,y)
+    surface.blit(text_surface, text_rect)
+    
 # Cambio el título de la ventana
 pygame.display.set_caption("Juego pelota")
 
@@ -19,6 +28,7 @@ velocidadBate = [velocidad, velocidad]
 blanco = 255, 255, 255
 negro = 0, 0, 0
 fondo = pygame.image.load("fondo.png").convert()
+contador=0
 
 # Crea un objeto imagen pelota y obtengo su rectángulo
 pelota = pygame.image.load("pelota.png")
@@ -33,6 +43,7 @@ bate1Rectangulo = bate1.get_rect()
 bloques = pygame.image.load("bate.png")
 bloquefijo = bloques.get_rect()
 bloquefijo1 = bloques.get_rect()
+
 
 # Pongo el bate en el centro de la pantalla
 pelotaRectangulo.move_ip(tamanio[0]/2,tamanio[1]/2)
@@ -67,9 +78,11 @@ while corriendo:
     if bloquefijo.colliderect(pelotaRectangulo):
         velocidadPelota[0] = - velocidadPelota[0]
         bloquefijo.move_ip(tamanio[0],tamanio[0])
+        contador+=1
     if bloquefijo1.colliderect(pelotaRectangulo):
         velocidadPelota[0] = - velocidadPelota[0]
         bloquefijo1.move_ip(tamanio[0],tamanio[0])
+        contador+=1
     if teclas[pygame.K_UP]:
         bateRectangulo=bateRectangulo.move(0, -velocidadBate[1])
     if teclas[pygame.K_DOWN]:
@@ -104,6 +117,11 @@ while corriendo:
     pantalla.blit(bate, bateRectangulo)
     pantalla.blit(bloques, bloquefijo)
     pantalla.blit(bloques, bloquefijo1)
+   
+    #muestro contadores
+    
+    draw_text(pantalla,str(contador), 40, 500, 20)
+    
     pygame.display.flip()
     
 # Salgo de pygame

@@ -32,6 +32,7 @@ pelotaRectangulo = pelota.get_rect()
 bate1 = pygame.image.load("bate.png")
 bate = pygame.image.load("bate.png")
 bateRectangulo = bate.get_rect()
+
 bate1Rectangulo = bate1.get_rect() 
 bloques = pygame.image.load("bate.png")
 bloquefijo = bloques.get_rect()

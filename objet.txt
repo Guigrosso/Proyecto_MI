@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 1) video bloques  https://www.youtube.com/watch?v=HNVBL6CRnMw
 2) 
+=======
+Patti drogon
+>>>>>>> ed85512f5db44d2ae5ce2fd445fb625ae4d512f8

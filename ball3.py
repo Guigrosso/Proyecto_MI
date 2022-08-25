@@ -38,11 +38,14 @@ pelotaRectangulo = pelota.get_rect()
 bate1 = pygame.image.load("bate.png")
 bate = pygame.image.load("bate.png")
 bateRectangulo = bate.get_rect()
-
+bategrande = pygame.image.load("bategrande.png")
 bate1Rectangulo = bate1.get_rect() 
 bloques = pygame.image.load("bate.png")
 bloquefijo = bloques.get_rect()
 bloquefijo1 = bloques.get_rect()
+batePRect = bategrande.get_rect()
+#bate1Rectangulo = True
+
 
 
 # Pongo el bate en el centro de la pantalla
@@ -51,7 +54,7 @@ bateRectangulo.move_ip(tamanio[0]/4,tamanio[1]/2)
 bate1Rectangulo.move_ip(tamanio[0]*3/4,tamanio[1]/2)
 bloquefijo.move_ip(tamanio[0]/8,tamanio[1]/4)
 bloquefijo1.move_ip(tamanio[0]/8,tamanio[1]/2)
-
+batePRect.move_ip(tamanio[0]*3/4,tamanio[1]/2)
 
 # Comenzamos el bucle del juego
 corriendo = True
@@ -69,8 +72,10 @@ while corriendo:
     teclas = pygame.key.get_pressed()
     if teclas[pygame.K_w]:
         bate1Rectangulo=bate1Rectangulo.move(0, -velocidadBate[1])
+        batePRect=batePRect.move(0, -velocidadBate[1])
     if teclas[pygame.K_s]:
         bate1Rectangulo=bate1Rectangulo.move(0, velocidadBate[1])
+        batePRect=batePRect.move(0, velocidadBate[1])
         
     # Compruebo si hay colisión
     if bateRectangulo.colliderect(pelotaRectangulo) or bate1Rectangulo.colliderect(pelotaRectangulo):
@@ -107,6 +112,8 @@ while corriendo:
         velocidadBate[0] = -velocidadBate[0]
     if bateRectangulo.top < 0 or bateRectangulo.bottom > altura:
         velocidadBate[1] = -velocidadBate[1]
+    
+    
             
         
     # Pinto el fondo de blanco, dibujo la pelota y actualizo la pantalla
@@ -117,7 +124,12 @@ while corriendo:
     pantalla.blit(bate, bateRectangulo)
     pantalla.blit(bloques, bloquefijo)
     pantalla.blit(bloques, bloquefijo1)
-   
+    
+    if contador >= 2:
+        bate1 = bategrande
+        bate1Rectangulo = batePRect
+        
+    
     #muestro contadores
     
     draw_text(pantalla,str(contador), 40, 500, 20)

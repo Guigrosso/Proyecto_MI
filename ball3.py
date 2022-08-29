@@ -28,16 +28,20 @@ velocidadBate = [velocidad, velocidad]
 velocidadBate1 = [velocidad, velocidad]
 blanco = 255, 255, 255
 negro = 0, 0, 0
-fondo = pygame.image.load("fondo.png").convert()
+fondo = pygame.image.load("fondo.png")
 contador=0
 
 # Crea un objeto imagen pelota y obtengo su rectángulo
 pelota = pygame.image.load("pelotaN.png")
+
+
 pelotaRectangulo = pelota.get_rect()
 
+
+
 # Crea un objeto imagen bate y obtengo su rectángulo
-bate1 = pygame.image.load("bate.png")
-bate = pygame.image.load("bate.png")
+bate1 = pygame.image.load("botin.png")
+bate = pygame.image.load("botin1.png")
 bateRectangulo = bate.get_rect()
 bategrande = pygame.image.load("bategrande.png")
 bate1Rectangulo = bate1.get_rect() 

@@ -1,4 +1,4 @@
-import sys, pygame, time, os
+import sys, pygame, time, os, random
 
 
 # Inicializamos pygame
@@ -125,10 +125,21 @@ while corriendo:
         bateRectangulo.top = velocidadBate[1]-velocidadBate[1]
     if bateRectangulo.bottom > altura:
         bateRectangulo.bottom = bateRectangulo.bottom - velocidadBate [1]
+    if contador ==1:
+        if bate1Rectangulo.colliderect(pelotaRectangulo):
+            velocidadPelota = [0,0]
+            if teclas[pygame.K_w]:
+                pelotaRectangulo=pelotaRectangulo.move(0, -velocidadBate1[1])
+            if teclas[pygame.K_s]:
+                pelotaRectangulo=pelotaRectangulo.move(0, velocidadBate1[1])
+            if teclas [pygame.K_q]:
+                velocidadPelota = [2,2]
     if contador >=2:
-        
         bate1 = bategrande
         bate1Rectangulo = batePRect
+        
+            
+        
         
         velocidadBate = [0,0]
         #segundos=5

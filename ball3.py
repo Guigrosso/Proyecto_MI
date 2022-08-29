@@ -1,4 +1,4 @@
-import sys, pygame
+import sys, pygame, time, os
 
 
 # Inicializamos pygame
@@ -25,13 +25,14 @@ ancho, altura = tamanio
 velocidad = 2
 velocidadPelota = [velocidad, velocidad]
 velocidadBate = [velocidad, velocidad]
+velocidadBate1 = [velocidad, velocidad]
 blanco = 255, 255, 255
 negro = 0, 0, 0
 fondo = pygame.image.load("fondo.png").convert()
 contador=0
 
 # Crea un objeto imagen pelota y obtengo su rectángulo
-pelota = pygame.image.load("pelota.png")
+pelota = pygame.image.load("pelotaN.png")
 pelotaRectangulo = pelota.get_rect()
 
 # Crea un objeto imagen bate y obtengo su rectángulo
@@ -40,11 +41,17 @@ bate = pygame.image.load("bate.png")
 bateRectangulo = bate.get_rect()
 bategrande = pygame.image.load("bategrande.png")
 bate1Rectangulo = bate1.get_rect() 
+
+# Creo Bloques
+
 bloques = pygame.image.load("bate.png")
 bloquefijo = bloques.get_rect()
 bloquefijo1 = bloques.get_rect()
+
+# Creo poder de bate
+
 batePRect = bategrande.get_rect()
-#bate1Rectangulo = True
+
 
 
 
@@ -71,11 +78,11 @@ while corriendo:
     # Compruebo si se ha pulsado alguna tecla
     teclas = pygame.key.get_pressed()
     if teclas[pygame.K_w]:
-        bate1Rectangulo=bate1Rectangulo.move(0, -velocidadBate[1])
-        batePRect=batePRect.move(0, -velocidadBate[1])
+        bate1Rectangulo=bate1Rectangulo.move(0, -velocidadBate1[1])
+        batePRect=batePRect.move(0, -velocidadBate1[1])
     if teclas[pygame.K_s]:
-        bate1Rectangulo=bate1Rectangulo.move(0, velocidadBate[1])
-        batePRect=batePRect.move(0, velocidadBate[1])
+        bate1Rectangulo=bate1Rectangulo.move(0, velocidadBate1[1])
+        batePRect=batePRect.move(0, velocidadBate1[1])
         
     # Compruebo si hay colisión
     if bateRectangulo.colliderect(pelotaRectangulo) or bate1Rectangulo.colliderect(pelotaRectangulo):
@@ -105,14 +112,31 @@ while corriendo:
     # Compruebo si los bates llegan a los límites de la ventana
     if bate1Rectangulo.left < 0 or bate1Rectangulo.right > ancho:
         velocidadBate[0] = -velocidadBate[0]
-    if bate1Rectangulo.top < 0 or bate1Rectangulo.bottom > altura:
-        velocidadBate[1] = -velocidadBate[1]
+    if (bate1Rectangulo.top or batePRect.top) < 0:
+        bate1Rectangulo.top = velocidadBate1[1]-velocidadBate1[1]
+        batePRect.top = velocidadBate1[1]-velocidadBate1[1]
+    if (bate1Rectangulo.bottom or batePRect.bottom) > altura:
+        bate1Rectangulo.bottom = bate1Rectangulo.bottom - velocidadBate1 [1]
+        batePRect.bottom = batePRect.bottom - velocidadBate1 [1]
         
     if bateRectangulo.left < 0 or bateRectangulo.right > ancho:
         velocidadBate[0] = -velocidadBate[0]
-    if bateRectangulo.top < 0 or bateRectangulo.bottom > altura:
-        velocidadBate[1] = -velocidadBate[1]
-    
+    if bateRectangulo.top < 0:
+        bateRectangulo.top = velocidadBate[1]-velocidadBate[1]
+    if bateRectangulo.bottom > altura:
+        bateRectangulo.bottom = bateRectangulo.bottom - velocidadBate [1]
+    if contador >=2:
+        
+        bate1 = bategrande
+        bate1Rectangulo = batePRect
+        
+        velocidadBate = [0,0]
+        #segundos=5
+        #for i in range(segundos):
+         #   time.sleep(1)
+          #  i+=1
+           # if (i==5):
+            #    velocidadBate = [2,2]
     
             
         
@@ -125,9 +149,8 @@ while corriendo:
     pantalla.blit(bloques, bloquefijo)
     pantalla.blit(bloques, bloquefijo1)
     
-    if contador >= 2:
-        bate1 = bategrande
-        bate1Rectangulo = batePRect
+    
+            
         
     
     #muestro contadores

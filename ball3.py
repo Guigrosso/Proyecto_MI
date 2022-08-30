@@ -48,7 +48,7 @@ bate1Rectangulo = bate1.get_rect()
 
 # Creo Bloques
 
-bloques = pygame.image.load("bate.png")
+bloques = pygame.image.load("bloques.png")
 bloquefijo = bloques.get_rect()
 bloquefijo1 = bloques.get_rect()
 
@@ -139,19 +139,18 @@ while corriendo:
             if teclas [pygame.K_q]:
                 velocidadPelota = [2,2]
     if contador >=2:
+        
         bate1 = bategrande
         bate1Rectangulo = batePRect
         
-            
-        
-        
         velocidadBate = [0,0]
-        #segundos=5
-        #for i in range(segundos):
-         #   time.sleep(1)
-          #  i+=1
-           # if (i==5):
-            #    velocidadBate = [2,2]
+        
+        # for i in range(1,6):
+          #  time.sleep(1)
+           # print(i)
+            #if (i==5):
+             #   velocidadBate = [velocidad, velocidad]
+         
     
             
         

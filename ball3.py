@@ -57,18 +57,18 @@ bloqueRect1 = []
 bloques2 = []
 bloqueRect2 = []
 for i in range(0,cantBloques):
-    bloques1.append(pygame.image.load("bloquecuadrado.png"))
+    bloques1.append(pygame.image.load("bloquemediano.png"))
     bloqueRect1.append(bloques1[i].get_rect())
-    bloques2.append(pygame.image.load("bloquecuadrado.png"))
+    bloques2.append(pygame.image.load("bloquemediano.png"))
     bloqueRect2.append(bloques2[i].get_rect())
     
     
 #Ubico los bloques en la pantalla
 espacio = 50
 for i in range(0,int(cantBloques/2)):
-    bloqueRect1[i].move_ip(tamanio[0]/16-espacio,tamanio[1]/(cantBloques/2+1)*i+espacio)
-    bloqueRect1[int(i+cantBloques/2)].move_ip(tamanio[0]*2/16-espacio,tamanio[1]/(cantBloques/2+1)*i+espacio)
-    bloqueRect2[i].move_ip(tamanio[0]*15/16,tamanio[1]/(cantBloques/2+1)*i+espacio)
+    bloqueRect1[i].move_ip(tamanio[0]/16-espacio,tamanio[1]/(cantBloques/2+1)*i+espacio)    
+    bloqueRect1[int(i+cantBloques/2)].move_ip(tamanio[0]*2/16-espacio,tamanio[1]/(cantBloques/2+1)*i+espacio)    
+    bloqueRect2[i].move_ip(tamanio[0]*15/16,tamanio[1]/(cantBloques/2+1)*i+espacio)    
     bloqueRect2[int(i+cantBloques/2)].move_ip(tamanio[0]*14/16,tamanio[1]/(cantBloques/2+1)*i+espacio)
 
 
@@ -198,9 +198,9 @@ while corriendo:
             
         
     
-    #muestro contadores
-    
-    draw_text(pantalla,str(contador1), 40, 500, 20)
+    #muestro contadores    
+    draw_text(pantalla,str(contador1), 40, tamanio[0]/6*5, 20)
+    draw_text(pantalla,str(contador2), 40, tamanio[0]/6, 20)
     
     pygame.display.flip()
     

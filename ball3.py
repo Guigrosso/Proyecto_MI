@@ -143,14 +143,15 @@ while corriendo:
     # Colisiones
     
     # Colisiones de los bates
-    if bate1Rectangulo.colliderect(pelotaRectangulo) or bate2Rectangulo.colliderect(pelotaRectangulo):
-        if ((bate1Rectangulo.top <= pelotaRectangulo.bottom) or (bate1Rectangulo.bottom >= pelotaRectangulo.top) or (bate2Rectangulo.top <= pelotaRectangulo.bottom) or (bate2Rectangulo.bottom >= pelotaRectangulo.top)):
-            velocidadPelota[1] = - velocidadPelota[1]
-        if ((bate1Rectangulo.left >= pelotaRectangulo.right) or (bate1Rectangulo.right <= pelotaRectangulo.left) or (bate2Rectangulo.left >= pelotaRectangulo.right) or (bate2Rectangulo.right <= pelotaRectangulo.left)):
-            velocidadPelota[0] = - velocidadPelota[0]
-        
+    if bate1Rectangulo.colliderect(pelotaRectangulo):
+        velocidadPelota[0] = - velocidadPelota[0]
+    
+    if bate2Rectangulo.colliderect(pelotaRectangulo):
+        velocidadPelota[0] = - velocidadPelota[0]
+
     
     # Colisiones con los bloques
+    # ESTA ROTO ARREGLAR PARA QUE REBOTE BIEN
     for i in range(0,cantBloques):
         if bloqueRect1[i].colliderect(pelotaRectangulo):
             pygame.time.delay(2)

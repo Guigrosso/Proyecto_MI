@@ -1,5 +1,7 @@
 import sys, pygame, time, os, random
 
+#Este comentario solo sirve para hacer doble clic y buscar la palabra para editar 
+#png
 
 # Inicializamos pygame
 pygame.init()
@@ -22,21 +24,21 @@ pygame.display.set_caption("Juego pelota")
 
 # Inicializamos variables
 ancho, altura = tamanio
-velocidad = 2
+velocidad = 4
 velocidadPelota = [velocidad, velocidad]
 velocidadBate = [velocidad, velocidad]
 velocidadBate1 = [velocidad, velocidad]
 blanco = 255, 255, 255
 negro = 0, 0, 0
 fondo = pygame.image.load("fondo.png")
-contador=0
+contador1 = 0
+contador2 = 0
 
 # Crea un objeto imagen pelota y obtengo su rectángulo
 pelota = pygame.image.load("pelotaN.png")
 
 
 pelotaRectangulo = pelota.get_rect()
-
 
 
 # Crea un objeto imagen bate y obtengo su rectángulo
@@ -46,16 +48,33 @@ bateRectangulo = bate.get_rect()
 bategrande = pygame.image.load("bategrande.png")
 bate1Rectangulo = bate1.get_rect() 
 
-# Creo Bloques
+#Bloques
 
-bloques = pygame.image.load("bloques.png")
-bloquefijo = bloques.get_rect()
-bloquefijo1 = bloques.get_rect()
+# Creo Bloques
+cantBloques = 10
+bloques1 = []
+bloqueRect1 = []
+bloques2 = []
+bloqueRect2 = []
+for i in range(0,cantBloques):
+    bloques1.append(pygame.image.load("bloquecuadrado.png"))
+    bloqueRect1.append(bloques1[i].get_rect())
+    bloques2.append(pygame.image.load("bloquecuadrado.png"))
+    bloqueRect2.append(bloques2[i].get_rect())
+    
+    
+#Ubico los bloques en la pantalla
+espacio = 50
+for i in range(0,int(cantBloques/2)):
+    bloqueRect1[i].move_ip(tamanio[0]/16-espacio,tamanio[1]/(cantBloques/2+1)*i+espacio)
+    bloqueRect1[int(i+cantBloques/2)].move_ip(tamanio[0]*2/16-espacio,tamanio[1]/(cantBloques/2+1)*i+espacio)
+    bloqueRect2[i].move_ip(tamanio[0]*15/16,tamanio[1]/(cantBloques/2+1)*i+espacio)
+    bloqueRect2[int(i+cantBloques/2)].move_ip(tamanio[0]*14/16,tamanio[1]/(cantBloques/2+1)*i+espacio)
+
+
 
 # Creo poder de bate
-
 batePRect = bategrande.get_rect()
-
 
 
 
@@ -63,8 +82,6 @@ batePRect = bategrande.get_rect()
 pelotaRectangulo.move_ip(tamanio[0]/2,tamanio[1]/2)
 bateRectangulo.move_ip(tamanio[0]/4,tamanio[1]/2)
 bate1Rectangulo.move_ip(tamanio[0]*3/4,tamanio[1]/2)
-bloquefijo.move_ip(tamanio[0]/8,tamanio[1]/4)
-bloquefijo1.move_ip(tamanio[0]/8,tamanio[1]/2)
 batePRect.move_ip(tamanio[0]*3/4,tamanio[1]/2)
 
 # Comenzamos el bucle del juego
@@ -74,7 +91,7 @@ while corriendo:
     # Espero un tiempo (milisegundos) para que la pelota no vaya muy rápida
     pygame.time.delay(2)
     
-    # Capturamos los eventoos que se han producido
+    # Capturamos los eventos que se han producido
     for evento in pygame.event.get():
         #Si el eventoo es salir de la ventana, terminamos
         if evento.type == pygame.QUIT: corriendo = False
@@ -87,23 +104,36 @@ while corriendo:
     if teclas[pygame.K_s]:
         bate1Rectangulo=bate1Rectangulo.move(0, velocidadBate1[1])
         batePRect=batePRect.move(0, velocidadBate1[1])
-        
-    # Compruebo si hay colisión
+    
+    
+    #Descomentar lo siguiente para comentar las colisiones
+    #'''
+    
+    # Colisiones
     if bateRectangulo.colliderect(pelotaRectangulo) or bate1Rectangulo.colliderect(pelotaRectangulo):
         velocidadPelota[0] = - velocidadPelota[0]
-    if bloquefijo.colliderect(pelotaRectangulo):
-        velocidadPelota[0] = - velocidadPelota[0]
-        bloquefijo.move_ip(tamanio[0],tamanio[0])
-        contador+=1
-    if bloquefijo1.colliderect(pelotaRectangulo):
-        velocidadPelota[0] = - velocidadPelota[0]
-        bloquefijo1.move_ip(tamanio[0],tamanio[0])
-        contador+=1
+        
     if teclas[pygame.K_UP]:
         bateRectangulo=bateRectangulo.move(0, -velocidadBate[1])
+    
     if teclas[pygame.K_DOWN]:
         bateRectangulo=bateRectangulo.move(0, velocidadBate[1])
+    
+    for i in range(0,cantBloques):
+        if bloqueRect1[i].colliderect(pelotaRectangulo):
+            velocidadPelota[0] = - velocidadPelota[0]
+            bloqueRect1[i].move_ip(tamanio[0],tamanio[0])
+            contador1 += 1
         
+        if bloqueRect2[i].colliderect(pelotaRectangulo):
+            velocidadPelota[0] = - velocidadPelota[0]
+            bloqueRect2[i].move_ip(tamanio[0],tamanio[0])
+            contador2 += 1
+    
+    #'''    
+    
+    
+    
     # Muevo la pelota
     pelotaRectangulo = pelotaRectangulo.move(velocidadPelota)
     
@@ -129,7 +159,7 @@ while corriendo:
         bateRectangulo.top = velocidadBate[1]-velocidadBate[1]
     if bateRectangulo.bottom > altura:
         bateRectangulo.bottom = bateRectangulo.bottom - velocidadBate [1]
-    if contador ==1:
+    if contador1 ==1:
         if bate1Rectangulo.colliderect(pelotaRectangulo):
             velocidadPelota = [0,0]
             if teclas[pygame.K_w]:
@@ -137,8 +167,8 @@ while corriendo:
             if teclas[pygame.K_s]:
                 pelotaRectangulo=pelotaRectangulo.move(0, velocidadBate1[1])
             if teclas [pygame.K_q]:
-                velocidadPelota = [2,2]
-    if contador >=2:
+                velocidadPelota = [velocidad, velocidad]
+    if contador1 == 2:
         
         bate1 = bategrande
         bate1Rectangulo = batePRect
@@ -160,8 +190,9 @@ while corriendo:
     pantalla.blit(pelota, pelotaRectangulo)
     pantalla.blit(bate1, bate1Rectangulo)
     pantalla.blit(bate, bateRectangulo)
-    pantalla.blit(bloques, bloquefijo)
-    pantalla.blit(bloques, bloquefijo1)
+    for i in range(0,cantBloques):
+        pantalla.blit(bloques1[i], bloqueRect1[i])
+        pantalla.blit(bloques2[i], bloqueRect2[i])
     
     
             
@@ -169,7 +200,7 @@ while corriendo:
     
     #muestro contadores
     
-    draw_text(pantalla,str(contador), 40, 500, 20)
+    draw_text(pantalla,str(contador1), 40, 500, 20)
     
     pygame.display.flip()
     

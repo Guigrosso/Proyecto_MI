@@ -185,6 +185,10 @@ while corriendo:
     if contador1 ==1:
         if bate2Rectangulo.colliderect(pelotaRectangulo):
             velocidadPelota = [0,0]
+            if (pelotaRectangulo.top) < 0:
+                pelotaRectangulo.top = 0
+            if pelotaRectangulo.bottom >= altura:
+                pelotaRectangulo.bottom = altura
             if teclas[pygame.K_w]:
                 pelotaRectangulo=pelotaRectangulo.move(0, -velocidadBate1[1])
             if teclas[pygame.K_s]:

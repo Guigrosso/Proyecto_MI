@@ -1,3 +1,4 @@
+from socket import NI_NUMERICHOST
 import sys, pygame, time, os, random
 
 def draw_text(surface, text, size, x, y):
@@ -50,6 +51,7 @@ bate2 = pygame.image.load("botin.png")
 bate1Rectangulo = bate1.get_rect()
 bate2Rectangulo = bate2.get_rect() 
 bategrande = pygame.image.load("bategrande.png")
+batePRect = bategrande.get_rect()
 
 # Bloques
 cantBloques = 10
@@ -74,6 +76,7 @@ pelotaRectangulo.move_ip(tamanio[0]/2,tamanio[1]/2)
 # Bates
 bate1Rectangulo.move_ip(tamanio[0]/4,tamanio[1]/2)
 bate2Rectangulo.move_ip(tamanio[0]*3/4,tamanio[1]/2)
+batePRect.move_ip(tamanio[0]*3/4,tamanio[1]/2)
 
 # Bloques
 espacio = 50
@@ -112,8 +115,10 @@ while corriendo:
         
     # Bate 2
     if teclas[pygame.K_UP]:
+        batePRect = batePRect.move(0, -velocidadBate2[1])
         bate2Rectangulo = bate2Rectangulo.move(0, -velocidadBate2[1])    
     if teclas[pygame.K_DOWN]:
+        batePRect = batePRect.move(0, velocidadBate2[1])
         bate2Rectangulo = bate2Rectangulo.move(0, velocidadBate2[1])
     
     # Límites de movimiento
@@ -134,6 +139,11 @@ while corriendo:
         bate2Rectangulo.top = 0
     if bate2Rectangulo.bottom >= altura:
         bate2Rectangulo.bottom = altura
+    
+    if batePRect.top <= 0:
+        batePRect.top = 0
+    if batePRect.bottom >= altura:
+        batePRect.bottom = altura
     
     
     
@@ -195,19 +205,26 @@ while corriendo:
                 pelotaRectangulo=pelotaRectangulo.move(0, velocidadBate1[1])
             if teclas [pygame.K_q]:
                 velocidadPelota = [velocidad, velocidad]
-    if contador1 == 2:
+    '''
+    
+    if contador1 >= 2:
         
+        
+        def temporizador():
+            numero = 5
+            for i in range (1,numero):
+                time.sleep(1)
+                numero -= 1
+                if (numero == 1):
+                    numero =1
+            return numero
+    
         bate2 = bategrande
         bate2Rectangulo = batePRect
         
-        velocidadBate2 = [0,0]
-        
-        # for i in range(1,6):
-          #  time.sleep(1)
-           # print(i)
-            #if (i==5):
-             #   velocidadBate = [velocidad, velocidad]
-    '''     
+        velocidadBate1 = [0,0]
+        if temporizador() == 1:
+            velocidadBate1 = [velocidad, velocidad]
     
             
         
